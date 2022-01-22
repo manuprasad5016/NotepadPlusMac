@@ -1,15 +1,26 @@
 <template>
-	<div>
-		<lightning-button label="New Note" onclick={newTab}> </lightning-button> &nbsp;&nbsp;
-		<lightning-button label="Save" onclick={saveHandler}> </lightning-button>
+	<div style="background-color: white;">
+		<div class="slds-grid slds-wrap">
+			<div class="slds-col slds-size_11-of-12">
+				<span>
+					<lightning-tabset variant="scoped">
+						<template for:each={recordValues} for:item="tab">
+							<lightning-tab label={tab.Name} key={tab.Id} value={tab.Id} onactive={handleTabChange}>
+								<lightning-textarea onchange={getUpdatedString} readonly={onlyreadable}
+									value={tab.Content}>
+								</lightning-textarea>
+							</lightning-tab>
+						</template>
+					</lightning-tabset>
+				</span>
+			</div>
+			<div class="slds-col slds-size_1-of-12">
+				<span>
+					<br />&nbsp;<lightning-button variant="brand" label="New Note" onclick={newTab}> </lightning-button>
+					<br /><br />
+					&nbsp;<lightning-button variant="brand" label="Save" onclick={saveHandler}> </lightning-button>
+				</span>
+			</div>
+		</div>
 	</div>
-	<br />
-	<lightning-tabset variant="scoped">
-		<template for:each={recordValues} for:item="tab">
-			<lightning-tab label={tab.Name} key={tab.Id} value={tab.Id} onactive={handleTabChange}>
-				<lightning-textarea onchange={getUpdatedString} readonly={onlyreadable} value={tab.Content}>
-				</lightning-textarea>
-			</lightning-tab>
-		</template>
-	</lightning-tabset>
 </template>
