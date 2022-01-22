@@ -12,6 +12,7 @@ export default class NotepadPlusPlus extends LightningElement {
 	error;
 	onlyreadable = false;
 	activeTabId;
+	activeTabName;
 
 
 	connectedCallback() {
@@ -31,7 +32,12 @@ export default class NotepadPlusPlus extends LightningElement {
 
 	handleTabChange(event) {
 		this.activeTabId = event.target.value; 
-		getTabData({ tabName: event.target.label })
+		this.activeTabName = event.target.label;
+		this.getTabDataMethod();
+	}
+
+	getTabDataMethod(){
+		getTabData({ tabName: this.activeTabName })
 			.then((result) => {
 				this.contentString = result;
 				//Iterate the tab list, identify based on id and push the content
@@ -81,8 +87,8 @@ export default class NotepadPlusPlus extends LightningElement {
 	newTab() {
 		createData()
 			.then((result) => {
-				this.recordValues = result;
-				this.activeTabId = result[0].Id;
+				this.recordValues = result; 
+				this.getTabDataMethod();
 			})
 			.catch((error) => {
 				this.showNotification('Warning', 'Something went Wrong', 'warning');
