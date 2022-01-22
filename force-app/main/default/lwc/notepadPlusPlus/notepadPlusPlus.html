@@ -1,0 +1,15 @@
+<template>
+	<div>
+		<lightning-button label="New Note" onclick={newTab}> </lightning-button> &nbsp;&nbsp;
+		<lightning-button label="Save" onclick={saveHandler}> </lightning-button>
+	</div>
+	<br />
+	<lightning-tabset variant="scoped">
+		<template for:each={recordValues} for:item="tab">
+			<lightning-tab label={tab.Name} key={tab.Id} value={tab.Id} onactive={handleTabChange}>
+				<lightning-textarea onchange={getUpdatedString} readonly={onlyreadable} value={tab.Content}>
+				</lightning-textarea>
+			</lightning-tab>
+		</template>
+	</lightning-tabset>
+</template>
